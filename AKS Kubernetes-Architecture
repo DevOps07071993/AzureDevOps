@@ -1,1 +1,28 @@
-
+AKS is nothing but Azure Kubernetes Service.
+It is very highly available, secure, and then fully managed Kubernetes service on Microsoft Azure Cloud.
+It is available in 36 regions
+When compared to other cloud providers,AKS is the one which is available in highest number of regions.
+It will be able to run any type of workloads like,
+  -Windows based applications like .net apps
+  -Linux supported applications like Java
+Whenever we are creating a cluster,what we are creating and then what it is going to manage.We need to understand on a AKS architecture.
+---------------------------
+AKS Kubernetes Architecture:
+---------------------------
+Any Kubernetes,we know that it'll have a cluster control plane and also equivalent worker nodes.
+So in Azure perspective we have a Azure AKS cluster control plane and Azure AKS node pools.
+So usually in regular Kubernetes,you call the node says worker nodes.And in AWS you call it as manager node groups.In AKS we can call them as node pools for the worker nodes.
+So now, in master component means like where the cluster control plane is called.It is called the master component.
+(1)Container runtime(Docker) is common across master and worker nodes.To run our respective pods related to our components present inside that master.
+(2)Etcd is nothing but consistently and highly available Key/value store used as a Kubernetes backing store for all cluster data and It stores all the master and worker node information.
+(3)Kube-scheduler is responsible for distributing containers across multiple nodes which is nothing but multiple worker nodes.It watches for newly created pods with no assigned node and selects a node for them to run on.
+(4)Kube-apiserver acts as a front end for the Kubernetes control plane and it exposes the Kubernetes API and command line tools like kubectl,users...and even the master components like scheduler,controller manager and etcd and worker node components like kubelet everything can talk to this kube API server to perform the operations on the master.
+(5)AKS Kube Controller Manager responsible for noticing and then responding when nodes, containers or endpoints go down.So we'll have different controllers available here.They are,
+   - Node controllers responsible for noticing and responding when worker nodes are down.
+   - Replication controllers responsible for maintaining the correct number of pods for every application.
+   - Endpoint controllers and service account and token controllers.So, many controllers will be available for us under this kube controller manager.
+Now let's go to the worker nodes.In worker nodes, again, the common thing here is Container runtime(Docker).
+   -Container runtime(Docker) is the underlying software where we run all the Kubernetes components.
+   -Kubelet is the agent that runs on every node in the cluster.So this agent is responsible for making sure that containers are running in a pod on a node.
+    And these will be always in constant communication with the kube scheduler.So kube scheduler from master node talks to worker nodes to the kubelet.
+   -Kube proxy is nothing but a network proxy that runs on each node in your cluster.It maintains the network rules on the nodes.
