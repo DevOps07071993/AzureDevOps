@@ -1,0 +1,43 @@
+We are going to focus on creating our AKS cluster.So let's go to portal.azure.com then follow below steps:
+  -We can search for the Kubernetes services and we can start creating our cluster.
+  -So add, Kubernetes cluster.
+  -So subscription,I'm using the PAYASYOUGO subscription.
+  -So let's move on to resource group and then create a resource group.So I'm going to use aks-rg1
+  -Kubernetes cluster name is aksdemo1
+  -Region, I'm going to select Central US.
+  -Kubernetes version whatever is latest as on today which is not in preview but which is live that one I'm going to use.
+  -Node size Standard DS2 v2-->which is nothing but DS2 v2 will have 2 vCPU and then 7GB RAM, right? So if you want,you can use other servers also,which is smaller ones
+   but why we need to use DS2 v2 or DS2 related servers.We'll only select one server here.And why we need to use is because we need enhanced networking,
+   when we are doing other sections of our course.So example, like in our future topics,I'll tell you something called,Azure Disk for storage is fine.Azure MySQL for AKs requires enhanced networking,enabled on your servers so that the communication between Azure MySQL service and your VM instances,is in enhanced mode from network perspective.
+   So in our node pool, in our agent node pool,we are going to have one server with DS2 v2.And we are going to enable VM scale sets,so that we can scale our cluster if required.
+   And then we are going to move on to authentication.So another important thing about authentication method here is,either you can use service principle or system manage, system assigned managed identity.
+   So I, I prefer to use system assigned managed identity because for various reasons.So if I click on service principle and then go to next networking, and next.So if you see container registry here is disabled.
+   So that's the reason I'll come back,and then enabled system assigned managed identity.So this is in the foundation step.
+   I have a documentation reference link here related to managed identity.And if you go inside that there will be one important point here, okay?
+   So clusters using service principles eventually reach a state in which the service principle must be (indistinct) to keep the cluster working.
+   So managing service principles adds complexity which is why it is easier to use managed identity instead.
+   And as part of whenever the cluster is creating,it is going to automatically create the managed identity.So we really don't need to worry about it. So I prefer to use the highest level of security and then flexible, and then less complex thing, solution here.
+   So I'm going to use,system assigned managed identity and I'm going to enable the RBAC and encryption type I'm going to leave it as default
+   I'm going to move on to networking, right? So in networking also,so we will have both the basic networking and then advanced networking.
+
+   So here also we are going to select the best,means like if it is our production grid cluster,so which we are going to use in that line only we are going to select our features.At least we are not putting two to three servers
+   or four servers and then burning our cost.
+   But at least we are trying to use the settings in the production grid.
+   So I'll select the network configuration,
+   I'll leave all these virtual network, cluster network, all these things to default and I will ensure that network policy we are going to use, Azure.
+   So which installs the Azure Container Network Interface,CNI plugins related to it when you use the Azure,so that everything, your part network and then everything all the networks will be with Azure only.
+   So instead of customize networking you use Azure level networking only which also will give you the enhancer performance. So rest all you are going to leave as defaults and then you're going to ensure that network policy is Azure.
+   And then in this section, network configuration is advanced.
+   Authentication is, system manager identity and networking advanced, and then Azure.
+
+   So let's move on and then go to integrations.So now in integration section, so container registry.So as on today,currently we are not using any of this section here.So we really don't need to burn our money with the creating the container registry and then associating to this Kubernetes cluster.
+   So we can have using, we'll be using currently Docker Hub but when we move on to upcoming sections here,
+   So like whenever we are using Azure Container Registry Integration and then Azure Container Registry Build,Azure DevOps with the Azure Repos and then Azure Container Registry.
+   In these sections primarily,we are going to focus on using the container registry.For now we leave it none because per day it is going to charge close to $1 even if we use the basic container repository.
+   So we are not going to integrate now but as an add-on in future, we can add it, okay?
+   So we'll move on and then container monitoring enabled by default and then we'll move on to next tags.And then we'll click on review plus create.
+   And once the validation is passed we are going to create the cluster and cluster creation might take close to 5 to 10 minutes.
+   And then once it is created our Kubernetes control plane will be ready for us with the one node as in node pool, which is nothing but one worker node will be created as part of that.
+   So I have clicked on create and then it is getting created.
+   So let's wait for it to complete. So it took close to 15 minutes to create the cluster and now we will move on to verify what it got created, okay?
+   Kubernetes cluster got created Successfully.
